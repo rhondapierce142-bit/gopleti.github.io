@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gopleti – Отдаване под наем на товарни автомобили в България</title>
+  <meta name="description" content="Gopleti предлага надеждни товарни автомобили под наем в България. Широка гама превозни средства за бизнес и частни нужди." />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1a18;
+      --parchment: #f5f2ed;
+      --stone: #e8e4dd;
+      --clay: #c4a882;
+      --rust: #8b5e3c;
+      --slate: #4a5568;
+      --mist: #f9f7f4;
+      --border: #ddd8d0;
+      --accent: #6b4c2a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--parchment);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── COOKIE BANNER ── */
+    .ck-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(26,26,24,0.45);
+      z-index: 9000;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 1.5rem;
+      backdrop-filter: blur(3px);
+    }
+    .ck-overlay.ck-hidden { display: none; }
+    .ck-box {
+      background: #fff;
+      border-radius: 4px;
+      max-width: 780px;
+      width: 100%;
+      padding: 2rem 2.5rem;
+      border-top: 4px solid var(--clay);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+    }
+    .ck-box h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.7rem;
+      color: var(--ink);
+    }
+    .ck-box p { font-size: 0.9rem; color: var(--slate); line-height: 1.6; }
+    .ck-actions { display: flex; gap: 1rem; margin-top: 1.4rem; flex-wrap: wrap; }
+    .ck-btn-accept {
+      background: var(--rust);
+      color: #fff;
+      border: none;
+      padding: 0.65rem 1.8rem;
+      border-radius: 3px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: background 0.2s;
+    }
+    .ck-btn-accept:hover { background: var(--accent); }
+    .ck-btn-decline {
+      background: transparent;
+      color: var(--slate);
+      border: 1px solid var(--border);
+      padding: 0.65rem 1.5rem;
+      border-radius: 3px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .ck-btn-decline:hover { border-color: var(--slate); }
+
+    /* ── HEADER ── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 800;
+      background: rgba(245,242,237,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .hd-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .hd-logo img { height: 44px; width: auto; display: block; }
+    .hd-logo span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--rust);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .hd-nav { display: flex; gap: 2rem; list-style: none; }
+    .hd-nav a {
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .hd-nav a:hover { color: var(--rust); }
+    .hd-cta {
+      background: var(--rust);
+      color: #fff;
+      border: none;
+      padding: 0.55rem 1.4rem;
+      border-radius: 3px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: background 0.2s;
+    }
+    .hd-cta:hover { background: var(--accent); }
+    .hd-burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hd-burger span { display: block; width: 26px; height: 2px; background: var(--ink); border-radius: 2px; }
+
+    /* ── HERO ── */
+    .hero-wrap {
+      position: relative;
+      min-height: 92vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 4rem 6rem 8%;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-label {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--clay);
+      padding-bottom: 0.3rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      line-height: 1.08;
+      color: var(--ink);
+      font-weight: 700;
+      margin-bottom: 1.8rem;
+    }
+    .hero-title em { font-style: italic; color: var(--rust); }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--slate);
+      max-width: 460px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--rust);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.8rem 2rem;
+      border-radius: 3px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+    .btn-ghost {
+      border: 1.5px solid var(--ink);
+      color: var(--ink);
+      text-decoration: none;
+      padding: 0.8rem 2rem;
+      border-radius: 3px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: background 0.2s, color 0.2s;
+      display: inline-block;
+    }
+    .btn-ghost:hover { background: var(--ink); color: #fff; }
+    .hero-img-side {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-img-side img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-img-side::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--parchment) 0%, transparent 30%);
+    }
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-item {}
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--rust);
+    }
+    .stat-lbl {
+      font-size: 0.8rem;
+      color: var(--slate);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ── MARQUEE STRIP ── */
+    .strip-bar {
+      background: var(--rust);
+      color: #fff;
+      padding: 0.8rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .strip-track {
+      display: inline-flex;
+      animation: stripMove 28s linear infinite;
+    }
+    .strip-item {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0 3rem;
+    }
+    .strip-dot { opacity: 0.5; }
+    @keyframes stripMove { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── ABOUT ── */
+    .about-sect {
+      padding: 7rem 8%;
+      display: grid;
+      grid-template-columns: 5fr 4fr;
+      gap: 5rem;
+      align-items: center;
+      background: var(--mist);
+    }
+    .about-kicker {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 1.2rem;
+    }
+    .about-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.2;
+      margin-bottom: 1.8rem;
+    }
+    .about-body { color: var(--slate); font-size: 1rem; line-height: 1.85; }
+    .about-body p + p { margin-top: 1.2rem; }
+    .about-values {
+      display: grid;
+      gap: 1.5rem;
+    }
+    .val-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--clay);
+      padding: 1.3rem 1.5rem;
+      border-radius: 2px;
+    }
+    .val-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      margin-bottom: 0.4rem;
+      color: var(--ink);
+    }
+    .val-card p { font-size: 0.88rem; color: var(--slate); line-height: 1.6; }
+
+    /* ── FLEET ── */
+    .fleet-sect {
+      padding: 7rem 8%;
+      background: var(--parchment);
+    }
+    .fleet-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 4rem;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .fleet-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      max-width: 480px;
+    }
+    .fleet-sub { color: var(--slate); font-size: 0.95rem; max-width: 320px; }
+    .fleet-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2px;
+      background: var(--border);
+    }
+    .fl-card {
+      background: var(--mist);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.25s;
+    }
+    .fl-card:hover { background: #fff; }
+    .fl-icon {
+      font-size: 2.4rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+    .fl-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      margin-bottom: 0.8rem;
+    }
+    .fl-card p { font-size: 0.9rem; color: var(--slate); line-height: 1.7; }
+    .fl-specs {
+      margin-top: 1.3rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .fl-tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.7rem;
+      border-radius: 2px;
+      color: var(--slate);
+    }
+
+    /* ── GALLERY ── */
+    .gallery-sect {
+      background: var(--stone);
+      padding: 5rem 0;
+    }
+    .gallery-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 8%;
+    }
+    .gallery-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 0.8rem;
+    }
+    .gallery-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      margin-bottom: 3rem;
+    }
+    .gallery-mosaic {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 280px 280px;
+      gap: 0.5rem;
+    }
+    .gm-item { overflow: hidden; }
+    .gm-item:first-child { grid-row: 1 / 3; }
+    .gm-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .gm-item:hover img { transform: scale(1.04); }
+
+    /* ── SERVICES ── */
+    .services-sect {
+      padding: 7rem 8%;
+      background: var(--ink);
+      color: #fff;
+    }
+    .sv-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 5rem;
+      align-items: center;
+    }
+    .sv-kicker {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 1.2rem;
+    }
+    .sv-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+      line-height: 1.2;
+    }
+    .sv-desc { color: rgba(255,255,255,0.65); font-size: 1rem; line-height: 1.85; }
+    .sv-list { display: grid; gap: 1.5rem; }
+    .sv-item {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      padding: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 2px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .sv-item:hover { border-color: var(--clay); background: rgba(196,168,130,0.07); }
+    .sv-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--clay);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 2.5rem;
+    }
+    .sv-item h4 { font-size: 1rem; margin-bottom: 0.4rem; font-weight: 500; }
+    .sv-item p { font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.65; }
+
+    /* ── WHY US ── */
+    .why-sect {
+      padding: 7rem 8%;
+      background: var(--mist);
+    }
+    .why-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      text-align: center;
+      margin-bottom: 0.8rem;
+    }
+    .why-sub {
+      text-align: center;
+      color: var(--slate);
+      font-size: 1rem;
+      max-width: 560px;
+      margin: 0 auto 4rem;
+      line-height: 1.7;
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+    .why-cell {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .why-cell:nth-child(4n) { border-right: none; }
+    .why-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .why-cell h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      margin-bottom: 0.5rem;
+    }
+    .why-cell p { font-size: 0.88rem; color: var(--slate); line-height: 1.65; }
+
+    /* ── INFO ARTICLES ── */
+    .info-sect {
+      padding: 7rem 8%;
+      background: var(--parchment);
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 5rem;
+      align-items: flex-start;
+    }
+    .info-article {}
+    .info-kicker {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 1rem;
+    }
+    .info-article h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .info-article p {
+      color: var(--slate);
+      font-size: 0.97rem;
+      line-height: 1.85;
+      margin-bottom: 1.2rem;
+    }
+    .info-article h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      margin: 2rem 0 0.8rem;
+      color: var(--ink);
+    }
+    .info-sidebar { position: sticky; top: 90px; }
+    .sidebar-card {
+      background: var(--stone);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      border-radius: 2px;
+    }
+    .sidebar-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+      color: var(--ink);
+    }
+    .sidebar-list { list-style: none; }
+    .sidebar-list li {
+      font-size: 0.88rem;
+      color: var(--slate);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .sidebar-list li:last-child { border-bottom: none; }
+    .si-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--clay);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── CONTACT ── */
+    .contact-sect {
+      padding: 7rem 8%;
+      background: var(--stone);
+    }
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: flex-start;
+    }
+    .ct-left {}
+    .ct-kicker {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 1rem;
+    }
+    .ct-left h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .ct-left p { color: var(--slate); font-size: 0.97rem; line-height: 1.8; margin-bottom: 2rem; }
+    .ct-details { display: grid; gap: 1.2rem; margin-bottom: 2.5rem; }
+    .ct-row {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .ct-ico {
+      width: 40px;
+      height: 40px;
+      background: var(--rust);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .ct-info strong { display: block; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.1rem; }
+    .ct-info span { font-size: 0.95rem; color: var(--ink); }
+    .ct-map {
+      width: 100%;
+      height: 200px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .ct-map iframe { width: 100%; height: 100%; border: none; display: block; }
+    .ct-form-wrap {
+      background: #fff;
+      padding: 2.5rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+    }
+    .ct-form-wrap h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 1.8rem;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-field { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+    .form-field label { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--slate); }
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 2px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      background: var(--mist);
+      color: var(--ink);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-field input:focus,
+    .form-field textarea:focus,
+    .form-field select:focus { border-color: var(--clay); }
+    .form-field textarea { resize: vertical; min-height: 130px; }
+    .form-check { display: flex; align-items: flex-start; gap: 0.7rem; margin-bottom: 1.5rem; }
+    .form-check input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; accent-color: var(--rust); }
+    .form-check label { font-size: 0.84rem; color: var(--slate); line-height: 1.5; }
+    .form-check a { color: var(--rust); text-decoration: underline; cursor: pointer; }
+    .btn-submit {
+      width: 100%;
+      background: var(--rust);
+      color: #fff;
+      border: none;
+      padding: 0.9rem 2rem;
+      border-radius: 3px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover { background: var(--accent); }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      color: var(--rust);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+    }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.75);
+      padding: 4rem 8% 2rem;
+    }
+    .ft-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 2rem;
+    }
+    .ft-brand img { height: 40px; width: auto; margin-bottom: 1.2rem; display: block; }
+    .ft-brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: #fff;
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .ft-brand p { font-size: 0.88rem; line-height: 1.7; }
+    .ft-col h5 {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 1.2rem;
+    }
+    .ft-col ul { list-style: none; display: grid; gap: 0.6rem; }
+    .ft-col a {
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: color 0.2s;
+    }
+    .ft-col a:hover { color: var(--clay); }
+    .ft-col button {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.65);
+      font-size: 0.88rem;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.2s;
+      text-align: left;
+    }
+    .ft-col button:hover { color: var(--clay); }
+    .ft-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .ft-copy { font-size: 0.82rem; }
+    .ft-legal { display: flex; gap: 1.5rem; }
+    .ft-legal button {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.82rem;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    .ft-legal button:hover { color: var(--clay); }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(26,26,24,0.6);
+      z-index: 9500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .modal-overlay.mo-open { opacity: 1; pointer-events: all; }
+    .modal-box {
+      background: #fff;
+      border-radius: 4px;
+      max-width: 760px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 3rem;
+      border-top: 4px solid var(--rust);
+      position: relative;
+    }
+    .modal-box h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      margin-bottom: 0.5rem;
+    }
+    .modal-date { font-size: 0.82rem; color: var(--slate); margin-bottom: 2rem; }
+    .modal-body h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin: 1.8rem 0 0.6rem; }
+    .modal-body p { font-size: 0.92rem; color: var(--slate); line-height: 1.8; margin-bottom: 0.8rem; }
+    .modal-body ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+    .modal-body li { font-size: 0.92rem; color: var(--slate); line-height: 1.7; margin-bottom: 0.4rem; }
+    .modal-close {
+      position: sticky;
+      bottom: 0;
+      display: block;
+      width: 100%;
+      margin-top: 2rem;
+      padding: 0.8rem;
+      background: var(--rust);
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: var(--accent); }
+    .modal-x {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--slate);
+      line-height: 1;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero-wrap { grid-template-columns: 1fr; min-height: auto; }
+      .hero-content { padding: 5rem 2rem 3rem; }
+      .hero-img-side { height: 380px; }
+      .hero-img-side::after { background: linear-gradient(to bottom, var(--parchment) 0%, transparent 20%); }
+      .about-sect { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 6%; }
+      .sv-top { grid-template-columns: 1fr; gap: 2rem; }
+      .info-grid { grid-template-columns: 1fr; }
+      .info-sidebar { position: static; }
+      .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
+      .ft-top { grid-template-columns: 1fr 1fr; }
+      .gallery-mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: 240px 240px; }
+      .gm-item:first-child { grid-row: auto; grid-column: 1 / 3; }
+    }
+    @media (max-width: 768px) {
+      .hd-nav, .hd-cta { display: none; }
+      .hd-burger { display: flex; }
+      .hero-stats { gap: 2rem; flex-wrap: wrap; }
+      .fleet-header { flex-direction: column; align-items: flex-start; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .ft-top { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .about-sect, .fleet-sect, .services-sect, .why-sect, .info-sect, .contact-sect { padding: 4rem 5%; }
+      .why-grid { grid-template-columns: 1fr; }
+      .gallery-mosaic { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .gm-item:first-child { grid-column: auto; }
+      .gm-item { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- COOKIE BANNER -->
+<div class="ck-overlay" id="ckOverlay">
+  <div class="ck-box">
+    <h3>Използваме бисквитки</h3>
+    <p>Уебсайтът на Gopleti използва бисквитки, за да осигури правилното му функциониране, да анализира трафика и да подобри потребителското изживяване. Като щракнете върху „Приемам", вие се съгласявате с използването на всички бисквитки. Може да оттеглите съгласието си по всяко време.</p>
+    <div class="ck-actions">
+      <button class="ck-btn-accept" id="ckAccept">Приемам</button>
+      <button class="ck-btn-decline" id="ckDecline">Само необходими</button>
+    </div>
+  </div>
+</div>
+
+<!-- PRIVACY MODAL -->
+<div class="modal-overlay" id="modalPrivacy">
+  <div class="modal-box">
+    <button class="modal-x" onclick="closeModal('modalPrivacy')">✕</button>
+    <h2>Политика за поверителност</h2>
+    <p class="modal-date">Последна актуализация: 1 януари 2025 г.</p>
+    <div class="modal-body">
+      <h3>1. Въведение</h3>
+      <p>„Гоплети" ЕООД (по-нататък „Gopleti", „ние", „нас") зачита неприкосновеността на личния живот на своите клиенти и посетители. Настоящата политика за поверителност описва какви лични данни събираме, как ги използваме, на кого ги разкриваме и какви права имате съгласно Общия регламент за защита на данните (GDPR) и приложимото българско законодателство.</p>
+      <h3>2. Администратор на данните</h3>
+      <p>Администратор на личните данни е „Гоплети" ЕООД, ЕИК 206578341, с адрес: ул. „Цар Самуил" 47, 1000 София, България. Електронна поща за защита на данните: privacy@gopleti.bg</p>
+      <h3>3. Какви данни събираме</h3>
+      <p>Събираме следните категории лични данни:</p>
+      <ul>
+        <li>Идентификационни данни: имена, ЕГН или номер на документ за самоличност, дата на раждане.</li>
+        <li>Данни за контакт: имейл адрес, телефонен номер, адрес на пребиваване.</li>
+        <li>Данни за превозното средство: шофьорска книжка, категории, валидност.</li>
+        <li>Финансови данни: данни за плащане, фактурна информация.</li>
+        <li>Технически данни: IP адрес, тип браузър, бисквитки, идентификатори на устройство.</li>
+      </ul>
+      <h3>4. Цели и правни основания за обработване</h3>
+      <p>Данните се обработват за: изпълнение на договор за наем; спазване на законови задължения; легитимен интерес (сигурност, предотвратяване на измами); и с ваше съгласие (маркетингови комуникации, бисквитки).</p>
+      <h3>5. Срок на съхранение</h3>
+      <p>Договорните данни се съхраняват 5 години след прекратяване на наемното отношение. Счетоводните данни – 10 години съгласно ЗКПО. Технически данни от бисквитки – до 12 месеца.</p>
+      <h3>6. Получатели на данните</h3>
+      <p>Данните могат да бъдат споделени с доставчици на ИТ услуги, счетоводни и юридически консултанти, застрахователни компании, органи на реда при законово задължение. Не продаваме лични данни на трети страни.</p>
+      <h3>7. Вашите права</h3>
+      <p>Имате право на: достъп до данните; коригиране; изтриване („право да бъдеш забравен"); ограничаване на обработването; преносимост; възражение; оттегляне на съгласие. За упражняване на правата се свържете с нас на privacy@gopleti.bg. Имате право да подадете жалба до Комисията за защита на личните данни (КЗЛД), www.cpdp.bg.</p>
+      <h3>8. Бисквитки</h3>
+      <p>Използваме необходими бисквитки (сесийни, за функционалност) и аналитични бисквитки (Google Analytics) само с ваше съгласие. Управлението на бисквитките е достъпно чрез банера при посещение на сайта.</p>
+      <h3>9. Промени в политиката</h3>
+      <p>При съществени промени ще ви уведомим по имейл или чрез видимо известие на уебсайта. Препоръчваме редовно да преглеждате тази страница.</p>
+    </div>
+    <button class="modal-close" onclick="closeModal('modalPrivacy')">Затвори</button>
+  </div>
+</div>
+
+<!-- TERMS MODAL -->
+<div class="modal-overlay" id="modalTerms">
+  <div class="modal-box">
+    <button class="modal-x" onclick="closeModal('modalTerms')">✕</button>
+    <h2>Условия за ползване</h2>
+    <p class="modal-date">Последна актуализация: 1 януари 2025 г.</p>
+    <div class="modal-body">
+      <h3>1. Обхват и приложимост</h3>
+      <p>Настоящите Условия за ползване уреждат достъпа и използването на уебсайта gopleti.bg, собственост на „Гоплети" ЕООД. Достъпвайки сайта, вие се съгласявате с тези условия. Ако не сте съгласни, моля, не използвайте уебсайта.</p>
+      <h3>2. Интелектуална собственост</h3>
+      <p>Всички материали на уебсайта – текстове, изображения, лога, графики, структура – са собственост на „Гоплети" ЕООД или са използвани с разрешение. Забранено е копирането, разпространението или модифицирането им без изричното ни писмено съгласие.</p>
+      <h3>3. Достъп до услугите</h3>
+      <p>Уебсайтът е предназначен за информационни цели. Ние си запазваме правото да променяме, спираме или прекратяваме достъпа до сайта или части от него по всяко време без предизвестие. Не гарантираме непрекъснат и безпроблемен достъп.</p>
+      <h3>4. Отговорност на потребителя</h3>
+      <p>Потребителят се задължава: да предоставя вярна и актуална информация при контакт с нас; да не използва сайта за незаконни цели; да не се опитва да нарушава сигурността или функционалността на сайта; да спазва приложимото законодателство.</p>
+      <h3>5. Ограничаване на отговорността</h3>
+      <p>„Гоплети" ЕООД не носи отговорност за: временна недостъпност на сайта; грешки или пропуски в съдържанието; вреди, произтичащи от употребата или невъзможността за употреба на сайта; съдържанието на свързани уебсайтове.</p>
+      <h3>6. Наемни отношения</h3>
+      <p>Конкретните условия за отдаване под наем на товарни автомобили се уреждат в отделен договор за наем, подписан между страните. Информацията на уебсайта е с информационен характер и не представлява оферта по смисъла на закона.</p>
+      <h3>7. Приложимо право</h3>
+      <p>За всички спорове, произтичащи от използването на уебсайта, се прилага българското законодателство. Компетентни са съдилищата в гр. София.</p>
+      <h3>8. Изменения на условията</h3>
+      <p>Запазваме правото да актуализираме тези условия. Промените влизат в сила от датата на публикуване на уебсайта. Продължаването на ползването на сайта след промяната означава приемане на новите условия.</p>
+      <h3>9. Контакт</h3>
+      <p>За въпроси, свързани с настоящите условия, се обръщайте към нас на: legal@gopleti.bg или на посочените на уебсайта контактни данни.</p>
+    </div>
+    <button class="modal-close" onclick="closeModal('modalTerms')">Затвори</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="hd-inner">
+    <a href="#" class="hd-logo">
+      <img src="logo.png" alt="Gopleti лого" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+      <span style="display:none;">Gopleti</span>
+    </a>
+    <nav>
+      <ul class="hd-nav">
+        <li><a href="#about">За нас</a></li>
+        <li><a href="#fleet">Флота</a></li>
+        <li><a href="#services">Услуги</a></li>
+        <li><a href="#info">Информация</a></li>
+        <li><a href="#contact">Контакти</a></li>
+      </ul>
+    </nav>
+    <a href="#contact" class="hd-cta">Свържете се</a>
+    <button class="hd-burger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero-wrap">
+  <div class="hero-content">
+    <span class="hero-label">Товарен транспорт · България</span>
+    <h1 class="hero-title">Надеждни<br>товарни<br><em>автомобили</em><br>под наем</h1>
+    <p class="hero-desc">Gopleti предлага широка гама товарни превозни средства за всякакви нужди — от малки градски фургони до многотонни камиони с висок товарен капацитет. Работим с бизнеси и физически лица в цялата страна.</p>
+    <div class="hero-btns">
+      <a href="#fleet" class="btn-primary">Разгледайте флота</a>
+      <a href="#contact" class="btn-ghost">Запитване</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">120+</div>
+        <div class="stat-lbl">Превозни средства</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">12+</div>
+        <div class="stat-lbl">Години опит</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">18</div>
+        <div class="stat-lbl">Града в България</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-img-side">
+    <img src="image1.jpg" alt="Товарен автомобил Gopleti" />
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip-bar">
+  <div class="strip-track">
+    <span class="strip-item">Гъвкави условия</span><span class="strip-item strip-dot">·</span>
+    <span class="strip-item">Технически изправни автомобили</span><span class="strip-item strip-dot">·</span>
+    <span class="strip-item">Застраховка включена</span><span class="strip-item strip-dot">·</span>
+    <span class="strip-item">Доставка на адрес</span><span class="strip-item strip-dot">·</span>
+    <span class="strip-item">Денонощна поддръжка</span><span class="strip-item strip-dot">·</span>
+    <span class="strip-item">Дългосрочен наем</span><span class="strip-item strip-dot">·</span>
+    <span class="strip-item">Гъвкави условия</span><span class="strip-item strip-dot">·</span>
+    <span class="strip-item">Технически изправни автомобили</span><span class="strip-item strip-dot">·</span>
+    <span class="strip-item">Застраховка включена</span><span class="strip-item strip-dot">·</span>
+    <span class="strip-item">Доставка на адрес</span><span class="strip-item strip-dot">·</span>
+    <span class="strip-item">Денонощна поддръжка</span><span class="strip-item strip-dot">·</span>
+    <span class="strip-item">Дългосрочен наем</span><span class="strip-item strip-dot">·</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about-sect" id="about">
+  <div>
+    <div class="about-kicker">За компанията</div>
+    <h2 class="about-heading">Повече от дванадесет години в сферата на товарния транспорт</h2>
+    <div class="about-body">
+      <p>Gopleti е българска компания, основана от специалисти с дългогодишен опит в логистиката и автомобилния транспорт. От самото начало нашата мисия е ясна: да предоставим на бизнесите и частните лица достъп до надеждни, добре поддържани товарни автомобили при максимално гъвкави условия.</p>
+      <p>През годините изградихме флот от над 120 превозни средства от различни класове, обхващащ нуждите на малкия търговец, строителния предприемач, логистичната компания и всеки, на когото е необходим товарен транспорт за определен период. Поддържаме активно присъствие в 18 града в България, включително София, Пловдив, Варна, Бургас, Русе, Стара Загора и редица по-малки центрове.</p>
+      <p>Всяко превозно средство от нашия флот преминава редовни технически прегледи и профилактики, за да сме сигурни, че то ще се представи надеждно при вашата задача. Ние вярваме, че надеждността не е просто технически въпрос — тя е въпрос на доверие.</p>
+      <p>Работим с компании от строителния, търговския и логистичния сектор, с ресторанти и хранителни вериги, с организатори на събития и с физически лица, на които е необходим товарен превоз за преместване или еднократен транспорт. Независимо от мащаба на задачата, подхождаме с еднакво внимание към всеки клиент.</p>
+    </div>
+  </div>
+  <div class="about-values">
+    <div class="val-card">
+      <h4>Техническа надеждност</h4>
+      <p>Всеки автомобил преминава задължителен технически преглед преди всяка наемна сделка. Не допускаме превозни средства с неизправности.</p>
+    </div>
+    <div class="val-card">
+      <h4>Прозрачни условия</h4>
+      <p>Без скрити такси и изненади. Условията на наема са ясно описани в договора, преди да поемете ключа.</p>
+    </div>
+    <div class="val-card">
+      <h4>Клиентско обслужване</h4>
+      <p>Нашият екип е на ваше разположение в работното време и при спешни случаи — и след края на работния ден.</p>
+    </div>
+    <div class="val-card">
+      <h4>Гъвкавост</h4>
+      <p>Кратко- и дългосрочен наем, месечни и седмични планове — адаптираме се към вашите нужди, не обратното.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FLEET -->
+<section class="fleet-sect" id="fleet">
+  <div class="fleet-header">
+    <div>
+      <div class="about-kicker">Нашият флот</div>
+      <h2 class="fleet-heading">Превозни средства за всяка задача</h2>
+    </div>
+    <p class="fleet-sub">Разполагаме с широка гама от класове и конфигурации. Намерете подходящото превозно средство за вашите нужди.</p>
+  </div>
+  <div class="fleet-grid">
+    <div class="fl-card">
+      <span class="fl-icon">🚐</span>
+      <h3>Малки фургони</h3>
+      <p>Идеални за градски доставки, малки стоки и бърз транспорт в рамките на града. Лесни за паркиране и икономични. Подходящи за куриерски компании, цветарници, малки магазини.</p>
+      <div class="fl-specs">
+        <span class="fl-tag">До 1 000 кг</span>
+        <span class="fl-tag">Kat. B</span>
+        <span class="fl-tag">Автоматик / Ръчна</span>
+      </div>
+    </div>
+    <div class="fl-card">
+      <span class="fl-icon">🚚</span>
+      <h3>Среден клас фургони</h3>
+      <p>Стандартните работни коне на нашия флот. Просторен товарен отсек, подходящ за мебели, строителни материали в малки количества и търговски доставки. Категория B или C1.</p>
+      <div class="fl-specs">
+        <span class="fl-tag">1 000 – 3 500 кг</span>
+        <span class="fl-tag">Kat. B / C1</span>
+        <span class="fl-tag">Климатик</span>
+      </div>
+    </div>
+    <div class="fl-card">
+      <span class="fl-icon">🛻</span>
+      <h3>Пикапи и платформи</h3>
+      <p>Отворен товарен кош, подходящ за обемни стоки, строителна техника с малки габарити, дървен материал. Устойчиви при тежки терени и строителни обекти.</p>
+      <div class="fl-specs">
+        <span class="fl-tag">До 1 500 кг</span>
+        <span class="fl-tag">4x4 налично</span>
+        <span class="fl-tag">Kat. B</span>
+      </div>
+    </div>
+    <div class="fl-card">
+      <span class="fl-icon">🚛</span>
+      <h3>Камиони 7.5 – 12 тона</h3>
+      <p>Средна категория за по-тежки товари. Подходящи за регионален транспорт, строителни и логистични компании. Изискват категория C. Предлагаме варианти с борд или фургон.</p>
+      <div class="fl-specs">
+        <span class="fl-tag">7.5 – 12 тона</span>
+        <span class="fl-tag">Kat. C</span>
+        <span class="fl-tag">Борд / Фургон</span>
+      </div>
+    </div>
+    <div class="fl-card">
+      <span class="fl-icon">🚜</span>
+      <h3>Тежкотоварни камиони</h3>
+      <p>За мащабни логистични задачи. Полуремаркета, камиони-влекачи и дълги платформи за извънгабаритни товари. Подходящи за международен транспорт в рамките на ЕС.</p>
+      <div class="fl-specs">
+        <span class="fl-tag">18 – 40 тона</span>
+        <span class="fl-tag">Kat. CE</span>
+        <span class="fl-tag">ADR налично</span>
+      </div>
+    </div>
+    <div class="fl-card">
+      <span class="fl-icon">❄️</span>
+      <h3>Хладилни автомобили</h3>
+      <p>Специализирани превозни средства с хладилен отсек за транспорт на бързо развалящи се стоки — хранителни продукти, фармацевтика, цветя. Температурни режими от -18°C до +8°C.</p>
+      <div class="fl-specs">
+        <span class="fl-tag">Хладилен режим</span>
+        <span class="fl-tag">ATP сертификат</span>
+        <span class="fl-tag">Различни размери</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-sect" id="gallery">
+  <div class="gallery-inner">
+    <div class="gallery-label">Нашият флот</div>
+    <h2 class="gallery-title">Поглед в действие</h2>
+    <div class="gallery-mosaic">
+      <div class="gm-item">
+        <img src="image2.jpg" alt="Товарен автомобил Gopleti под наем" />
+      </div>
+      <div class="gm-item">
+        <img src="image3.jpg" alt="Gopleti фургон" />
+      </div>
+      <div class="gm-item">
+        <img src="image4.jpg" alt="Gopleti камион" />
+      </div>
+      <div class="gm-item" style="overflow:hidden;">
+        <img src="image5.jpg" alt="Логистика Gopleti" />
+      </div>
+      <div class="gm-item">
+        <img src="image6.jpg" alt="Товарен транспорт България" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-sect" id="services">
+  <div class="sv-top">
+    <div>
+      <div class="sv-kicker">Нашите услуги</div>
+      <h2 class="sv-heading">Пълен набор от решения за товарен транспорт</h2>
+    </div>
+    <p class="sv-desc">Предлагаме комплексни наемни решения, съобразени с разнообразните нужди на съвременния бизнес — от еднодневен наем до дългосрочни корпоративни договори.</p>
+  </div>
+  <div class="sv-list">
+    <div class="sv-item">
+      <div class="sv-num">01</div>
+      <div>
+        <h4>Краткосрочен наем</h4>
+        <p>Наемете автомобил за ден, уикенд или седмица. Идеален за сезонни нужди, еднократни превози, преместване на офис или домакинство. Процедурата по наемане е бърза и лесна — минимум документи, максимум гъвкавост.</p>
+      </div>
+    </div>
+    <div class="sv-item">
+      <div class="sv-num">02</div>
+      <div>
+        <h4>Дългосрочен и оперативен наем</h4>
+        <p>За компании с постоянна нужда от товарни автомобили предлагаме месечни и годишни договори с фиксирани условия. Включва техническо обслужване, застраховка и смяна на гуми — вие се фокусирате върху бизнеса, ние се грижим за флота.</p>
+      </div>
+    </div>
+    <div class="sv-item">
+      <div class="sv-num">03</div>
+      <div>
+        <h4>Корпоративни решения</h4>
+        <p>Разработваме индивидуални договори за фирми с по-голям обем от превози. Управление на мулти-превозни средства, отчети за пробег и разходи, приоритетно обслужване и резервиране. Опция за брандиране на автомобилите с вашето лого.</p>
+      </div>
+    </div>
+    <div class="sv-item">
+      <div class="sv-num">04</div>
+      <div>
+        <h4>Доставка и прибиране на автомобила</h4>
+        <p>Не е необходимо да идвате при нас. Доставяме избраното превозно средство на вашия адрес в рамките на работния ден и го прибираме след изтичане на наема. Услугата е достъпна в 18 града.</p>
+      </div>
+    </div>
+    <div class="sv-item">
+      <div class="sv-num">05</div>
+      <div>
+        <h4>Пътна помощ и поддръжка</h4>
+        <p>При техническа неизправност по време на наема нашият екип е на ваше разположение. Осигуряваме пътна помощ и при необходимост — замяна с резервен автомобил, за да не бъде прекъснат вашият работен процес.</p>
+      </div>
+    </div>
+    <div class="sv-item">
+      <div class="sv-num">06</div>
+      <div>
+        <h4>Наем с шофьор</h4>
+        <p>Предлагаме опция за наем с професионален шофьор с необходимите категории и опит. Подходящо за компании без назначени шофьори или при нужда от допълнителен капацитет в пиков сезон.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-sect">
+  <h2 class="why-title">Защо клиентите избират Gopleti</h2>
+  <p class="why-sub">Обединяваме технологична надеждност, гъвкавост и персонализирано обслужване в едно комплексно предложение.</p>
+  <div class="why-grid">
+    <div class="why-cell">
+      <div class="why-icon">🔧</div>
+      <h4>Редовна поддръжка</h4>
+      <p>Всеки автомобил преминава технически преглед по строг вътрешен протокол преди всяка наемна операция.</p>
+    </div>
+    <div class="why-cell">
+      <div class="why-icon">📋</div>
+      <h4>Ясна документация</h4>
+      <p>Договорите са написани на разбираем език. Всички условия са посочени предварително — без изненади.</p>
+    </div>
+    <div class="why-cell">
+      <div class="why-icon">🛡️</div>
+      <h4>Пълна застраховка</h4>
+      <p>Всички превозни средства са с Гражданска отговорност и Каско, покриващо стандартните рискове при наем.</p>
+    </div>
+    <div class="why-cell">
+      <div class="why-icon">📍</div>
+      <h4>Широко покритие</h4>
+      <p>Офиси и партньорски пунктове в 18 града в България — от Видин до Бургас, от Русе до Благоевград.</p>
+    </div>
+    <div class="why-cell">
+      <div class="why-icon">⏱️</div>
+      <h4>Бързо оформяне</h4>
+      <p>Процедурата по наемане отнема минути. Минимум документи, онлайн резервация и бързо предаване на ключовете.</p>
+    </div>
+    <div class="why-cell">
+      <div class="why-icon">🌱</div>
+      <h4>Модерни двигатели</h4>
+      <p>Флотът ни включва превозни средства Euro 6 — ниски емисии, съответствие с нормите на ЕС и по-ниско гориво.</p>
+    </div>
+    <div class="why-cell">
+      <div class="why-icon">📞</div>
+      <h4>Денонощна линия</h4>
+      <p>Горещата ни телефонна линия работи 24 часа в денонощието за спешни случаи по пътя.</p>
+    </div>
+    <div class="why-cell">
+      <div class="why-icon">🤝</div>
+      <h4>Дългосрочно партньорство</h4>
+      <p>Голяма част от клиентите ни работят с нас повече от три години. Изграждаме отношения, а не само сделки.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INFO ARTICLES -->
+<section class="info-sect" id="info">
+  <div class="info-grid">
+    <div class="info-article">
+      <div class="info-kicker">Полезна информация</div>
+      <h2>Всичко, което трябва да знаете за наема на товарен автомобил</h2>
+      <p>Наемането на товарен автомобил е практично решение в много ситуации — когато трябва да преместите домакинство, да транспортирате строителни материали, да осигурите временен капацитет за вашия бизнес или да организирате сезонни доставки. Ето основното, което трябва да знаете, преди да се свържете с нас.</p>
+
+      <h3>Необходими документи</h3>
+      <p>За да наемете превозно средство от нашия флот, ще са ви необходими: валидна лична карта или паспорт; шофьорска книжка с необходимата категория за съответния автомобил; при корпоративен наем — актуално удостоверение за регистрация на фирмата. За автомобили над 3.5 тона е задължителна категория C, а за влекачи с ремарке — категория CE.</p>
+
+      <h3>Категории шофьорски книжки за товарни автомобили</h3>
+      <p>Категория B ви позволява да управлявате превозни средства до 3 500 кг (малки фургони и пикапи). За автомобили от 3 500 до 7 500 кг е необходима категория C1. За по-тежки камиони — категория C. За влекачи с ремарке — CE. Ако не сте сигурни каква категория е необходима за вашия случай, нашите специалисти ще ви помогнат да изберете правилното превозно средство.</p>
+
+      <h3>Застрахователно покритие</h3>
+      <p>Всички превозни средства от нашия флот разполагат с Задължителна застраховка „Гражданска отговорност" и Каско застраховка. Препоръчваме при наемане да се запознаете детайлно с обхвата на покритието и с франшизата. При желание от ваша страна можем да предложим допълнително покритие за по-висока защита.</p>
+
+      <h3>Пробег и горивна политика</h3>
+      <p>Стандартните наемни договори включват определен брой километри на ден. При необходимост от по-голям пробег предварително обсъдете условията с нашия екип. По отношение на горивото: автомобилите се предават с пълен резервоар и се очаква да бъдат върнати в същото състояние.</p>
+
+      <h3>Претоварване и правила за безопасност</h3>
+      <p>Строго забранено е натоварването на превозното средство над неговия технически допустим максимум. Претоварването не само нарушава закона, но и натоварва неравномерно спирачната система и ходовата част, застрашавайки безопасността. Всички наематели са длъжни да спазват Закона за движение по пътищата и приложимите нормативни актове.</p>
+
+      <h3>Международен транспорт</h3>
+      <p>При необходимост от транспорт извън България, моля, уведомете ни предварително. Не всички превозни средства от флота ни са разрешени за международно движение. За транспорт в рамките на ЕС предлагаме специализирани договори с необходимите документи за пресичане на граници.</p>
+
+      <h3>Сезонно търсене и резервации</h3>
+      <p>В периоди на засилено търсене — пролетта и есента, когато много домакинства се местят, и около коледните и новогодишни празници — препоръчваме предварителна резервация. Запазването на автомобил е безплатно и ви гарантира наличност точно когато имате нужда.</p>
+    </div>
+    <div class="info-sidebar">
+      <div class="sidebar-card">
+        <h4>Бързи факти</h4>
+        <ul class="sidebar-list">
+          <li><span class="si-dot"></span>120+ превозни средства в наличност</li>
+          <li><span class="si-dot"></span>18 града в България</li>
+          <li><span class="si-dot"></span>Euro 6 двигатели</li>
+          <li><span class="si-dot"></span>Каско + ГО включени</li>
+          <li><span class="si-dot"></span>Наем от 1 ден</li>
+          <li><span class="si-dot"></span>Доставка на адрес</li>
+          <li><span class="si-dot"></span>Фирмени договори</li>
+          <li><span class="si-dot"></span>Пътна помощ 24/7</li>
+        </ul>
+      </div>
+      <div class="sidebar-card">
+        <h4>Класове превозни средства</h4>
+        <ul class="sidebar-list">
+          <li><span class="si-dot"></span>Малки фургони (до 1 т)</li>
+          <li><span class="si-dot"></span>Средни фургони (до 3.5 т)</li>
+          <li><span class="si-dot"></span>Пикапи и платформи</li>
+          <li><span class="si-dot"></span>Камиони 7.5 – 12 тона</li>
+          <li><span class="si-dot"></span>Тежкотоварни (до 40 т)</li>
+          <li><span class="si-dot"></span>Хладилни автомобили</li>
+        </ul>
+      </div>
+      <div class="sidebar-card">
+        <h4>Работно време</h4>
+        <ul class="sidebar-list">
+          <li><span class="si-dot"></span>Понеделник – Петък: 08:00 – 19:00</li>
+          <li><span class="si-dot"></span>Събота: 09:00 – 16:00</li>
+          <li><span class="si-dot"></span>Неделя: по договаряне</li>
+          <li><span class="si-dot"></span>Спешна линия: 24/7</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-sect" id="contact">
+  <div class="contact-wrap">
+    <div class="ct-left">
+      <div class="ct-kicker">Свържете се с нас</div>
+      <h2>Готови сме да отговорим на вашите въпроси</h2>
+      <p>Изпратете ни запитване чрез формата, обадете се на телефона ни или посетете нашия офис в София. Нашият екип ще се свърже с вас в рамките на работния ден.</p>
+      <div class="ct-details">
+        <div class="ct-row">
+          <div class="ct-ico">📍</div>
+          <div class="ct-info">
+            <strong>Адрес</strong>
+            <span>ул. „Цар Самуил" 47, 1000 София, България</span>
+          </div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-ico">📞</div>
+          <div class="ct-info">
+            <strong>Телефон</strong>
+            <span>+359 2 834 71 26</span>
+          </div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-ico">✉️</div>
+          <div class="ct-info">
+            <strong>Имейл</strong>
+            <span>info@gopleti.bg</span>
+          </div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-ico">🕐</div>
+          <div class="ct-info">
+            <strong>Работно време</strong>
+            <span>Пон – Пет: 08:00–19:00 | Съб: 09:00–16:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="ct-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2932.5!2d23.3219!3d42.6977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa857b13f5d625%3A0x5c7c6c6c0e7f6f6f!2z0YPQuy4g0KbQsNGAINCh0LDQvNGD0LjQuyA0NywgU29maWE!5e0!3m2!1sbg!2sbg!4v1700000000000"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Gopleti офис на картата">
+        </iframe>
+      </div>
+    </div>
+    <div class="ct-form-wrap">
+      <h3>Изпратете запитване</h3>
+      <div id="formSuccess" class="form-success">Благодарим ви! Ще се свържем с вас скоро.</div>
+      <div id="contactForm">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="fname">Собствено име</label>
+            <input type="text" id="fname" name="fname" placeholder="Иван" autocomplete="given-name" />
+          </div>
+          <div class="form-field">
+            <label for="lname">Фамилия</label>
+            <input type="text" id="lname" name="lname" placeholder="Петров" autocomplete="family-name" />
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="email">Имейл адрес</label>
+          <input type="email" id="email" name="email" placeholder="ivan@example.com" autocomplete="email" />
+        </div>
+        <div class="form-field">
+          <label for="phone">Телефон</label>
+          <input type="tel" id="phone" name="phone" placeholder="+359 8XX XXX XXX" autocomplete="tel" />
+        </div>
+        <div class="form-field">
+          <label for="vehicle">Вид превозно средство</label>
+          <select id="vehicle" name="vehicle">
+            <option value="">— Изберете —</option>
+            <option>Малък фургон (до 1 т)</option>
+            <option>Среден фургон (до 3.5 т)</option>
+            <option>Пикап / Платформа</option>
+            <option>Камион 7.5 – 12 тона</option>
+            <option>Тежкотоварен камион</option>
+            <option>Хладилен автомобил</option>
+            <option>Не съм сигурен/а</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="message">Съобщение</label>
+          <textarea id="message" name="message" placeholder="Опишете вашата нужда — дати, маршрут, вид товар..."></textarea>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" id="agreePrivacy" name="agreePrivacy" />
+          <label for="agreePrivacy">Запознат/а съм с <a onclick="openModal('modalPrivacy')">Политиката за поверителност</a> и се съгласявам личните ми данни да бъдат обработени за целите на запитването.</label>
+        </div>
+        <button class="btn-submit" onclick="submitForm()">Изпрати запитване</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="ft-top">
+    <div class="ft-brand">
+      <img src="logo.png" alt="Gopleti" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+      <span class="ft-brand-name" style="display:none;">Gopleti</span>
+      <p>„Гоплети" ЕООД — надеждни товарни автомобили под наем в цяла България. Повече от 12 години опит в сферата на транспортните услуги.</p>
+    </div>
+    <div class="ft-col">
+      <h5>Навигация</h5>
+      <ul>
+        <li><a href="#about">За нас</a></li>
+        <li><a href="#fleet">Флота</a></li>
+        <li><a href="#services">Услуги</a></li>
+        <li><a href="#info">Информация</a></li>
+        <li><a href="#contact">Контакти</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h5>Услуги</h5>
+      <ul>
+        <li><a href="#services">Краткосрочен наем</a></li>
+        <li><a href="#services">Дългосрочен наем</a></li>
+        <li><a href="#services">Корпоративен наем</a></li>
+        <li><a href="#services">Наем с шофьор</a></li>
+        <li><a href="#services">Хладилен транспорт</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h5>Правна информация</h5>
+      <ul>
+        <li><button onclick="openModal('modalPrivacy')">Политика за поверителност</button></li>
+        <li><button onclick="openModal('modalTerms')">Условия за ползване</button></li>
+        <li><a href="mailto:legal@gopleti.bg">Правни въпроси</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span class="ft-copy">© 2025 „Гоплети" ЕООД · ЕИК 206578341 · Всички права запазени</span>
+    <div class="ft-legal">
+      <button onclick="openModal('modalPrivacy')">Политика за поверителност</button>
+      <button onclick="openModal('modalTerms')">Условия за ползване</button>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function() {
+    var ckKey = 'gopleti_cookie_consent';
+    var overlay = document.getElementById('ckOverlay');
+
+    function hideCookieBanner() {
+      overlay.classList.add('ck-hidden');
+    }
+
+    if (!localStorage.getItem(ckKey)) {
+      overlay.classList.remove('ck-hidden');
+    } else {
+      hideCookieBanner();
+    }
+
+    document.getElementById('ckAccept').addEventListener('click', function() {
+      localStorage.setItem(ckKey, 'accepted');
+      hideCookieBanner();
+    });
+
+    document.getElementById('ckDecline').addEventListener('click', function() {
+      localStorage.setItem(ckKey, 'declined');
+      hideCookieBanner();
+    });
+  })();
+
+  function openModal(id) {
+    var el = document.getElementById(id);
+    if (el) {
+      el.classList.add('mo-open');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeModal(id) {
+    var el = document.getElementById(id);
+    if (el) {
+      el.classList.remove('mo-open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) {
+        overlay.classList.remove('mo-open');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+
+  function submitForm() {
+    var fname = document.getElementById('fname').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var agree = document.getElementById('agreePrivacy').checked;
+
+    if (!fname || !email) {
+      alert('Моля, попълнете поне вашето име и имейл адрес.');
+      return;
+    }
+    if (!agree) {
+      alert('Моля, приемете Политиката за поверителност, за да продължите.');
+      return;
+    }
+
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.mo-open').forEach(function(m) {
+        m.classList.remove('mo-open');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+</script>
+</body>
+</html>
