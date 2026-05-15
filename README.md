@@ -1,1 +1,0 @@
-# gopleti.github.io
